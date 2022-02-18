@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Stack, IStackTokens } from '@fluentui/react';
+import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
 
-function App() {
+export interface IButtonExampleProps {
+  // These are set based on the toggles shown above the examples (not needed in real code)
+  disabled?: boolean;
+  checked?: boolean;
+}
+
+// Example formatting
+const stackTokens: IStackTokens = { childrenGap: 40 };
+
+export const App: React.FunctionComponent<IButtonExampleProps> = props => {
+  const { disabled, checked } = props;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack horizontal tokens={stackTokens}>
+      <DefaultButton text="Standard" onClick={_alertClicked} allowDisabledFocus disabled={disabled} checked={checked} />
+      <PrimaryButton text="Primary" onClick={_alertClicked} allowDisabledFocus disabled={disabled} checked={checked} />
+    </Stack>
   );
+}
+
+function _alertClicked(): void {
+  alert('Clicked');
 }
 
 export default App;
